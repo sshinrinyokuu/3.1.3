@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example</title>
+</head>
+<body>
+<h1>User, welcome spring boot security page!</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Roles</th>
+    </tr>
+
+    <tr th:each="user : ${listUser}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${#strings.listJoin(user.roles, ', ', 'name')}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

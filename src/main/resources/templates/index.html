@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+<h1>Admin Panel</h1>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Roles</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="user : ${listUser}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.roles}"></td>
+        <td>
+
+            <form th:action="@{/admin/edit}" method="post">
+                <input type="hidden" name="id" th:value="${user.id}"/>
+                <input type="text" name="username" placeholder="New Username"/>
+                <input type="password" name="password" placeholder="New Password"/>
+                <button type="submit">Edit</button>
+            </form>
+
+
+            <form th:action="@{/admin/delete}" method="post">
+                <input type="hidden" name="id" th:value="${user.id}"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+
+<h3>Add New User</h3>
+<form th:action="@{/admin/add}" method="post">
+    <input type="text" name="username" placeholder="Username" required/>
+    <input type="password" name="password" placeholder="Password" required/>
+    <select name="roleName">
+        <option value="ROLE_USER">USER</option>
+        <option value="ROLE_ADMIN">ADMIN</option>
+    </select>
+    <button type="submit">Add</button>
+</form>
+
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
+
+</body>
+</html>
